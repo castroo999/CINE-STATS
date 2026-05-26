@@ -27,24 +27,6 @@ export default function Footer() {
               (55) 15 99648-5913
             </span>
           </div>
-
-          <div className="coluna">
-            <h3>Inove Serralheria</h3>
-
-            <span>
-              <MdEmail size={25} /> inoveserralheria@gmail.com
-            </span>
-
-            <span>
-              <FaInstagram size={25} color="deeppink" />
-              @inove.serralheria.cerquilho
-            </span>
-
-            <span>
-              <FaWhatsapp size={25} color="green" />
-              (55) 15 99700-1378
-            </span>
-          </div>
         </div>
       </div>
     </div>

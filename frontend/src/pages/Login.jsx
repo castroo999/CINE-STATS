@@ -1,6 +1,6 @@
 import api from "../services/Api.js";
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { ThumbsUp } from "lucide-react";
 import "./Cadastro.css";
 import "./Login.css";
@@ -10,7 +10,6 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [modalAberto, setModalAberto] = useState(false);
   const [userModal, setUserModal] = useState("");
-  const navigate = useNavigate();
 
   async function login(e) {
     e.preventDefault();
@@ -45,17 +44,19 @@ export default function Login() {
           role: decoded.role,
         }),
       );
+
       //para salvar a mudança de conta automaticamente
       window.dispatchEvent(new Event("userChanged"));
 
       //para pegar somente o nome do usuario
       setUserModal(decoded.user);
+
       //para abrir o modal de login
       setModalAberto(true);
 
-      // espera um pouco e depois redireciona pra home
+      // espera um pouco e depois redireciona pra dashboard
       setTimeout(() => {
-        navigate("/dashboard");
+        window.location.href = "/dashboard";
       }, 1500);
 
       // limpa tudo dps
@@ -64,6 +65,7 @@ export default function Login() {
     } catch (error) {
       console.log("USER DIGITADO:", user);
       console.error(error.response?.data || error.message);
+
       alert("Erro ao fazer login");
     }
   }

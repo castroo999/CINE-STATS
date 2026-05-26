@@ -6,11 +6,13 @@
   justify-content: center;
   gap: 30px;
   font-family: "Poppins", sans-serif;
+  background: white;
+  min-height: 100vh;
 }
 
 .logo {
   width: 1000px;
-  height: 500px
+  height: 500px;
 }
 
 .conteudo h2 {

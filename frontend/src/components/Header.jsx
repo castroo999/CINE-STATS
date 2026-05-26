@@ -92,8 +92,8 @@ export default function Header() {
               <>
                 <Link to="/dashboard">INICIO</Link>
                 {/* <Link to="/servicos">MAPA</Link> */}
-                <Link to="/orcamentos">FAZER CHAMADO</Link>
-                <Link to="/ver_orcamentos">VER CHAMADOS</Link>
+                <Link to="/chamados">FAZER CHAMADO</Link>
+                <Link to="/ver_chamados">VER CHAMADOS</Link>
                 <Link to="/quem-somos">QUEM SOMOS</Link>
               </>
             )}
