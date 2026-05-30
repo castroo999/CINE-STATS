@@ -11,13 +11,6 @@
   gap: 8px;
 }
 
-.dashboard-heading span {
-  color: #b6002b;
-  font-size: 13px;
-  font-weight: 800;
-  text-transform: uppercase;
-}
-
 .dashboard-heading h1 {
   margin: 0;
   font-size: clamp(32px, 5vw, 48px);

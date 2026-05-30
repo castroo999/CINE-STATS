@@ -63,10 +63,17 @@
   border-left: 6px solid #d9dde3;
   background: #fff;
   box-shadow: 0 16px 45px rgba(20, 20, 20, 0.1);
+  transition: 0.3s ease;
+}
+
+.ticket-card:hover{
+    transform: translateY(-4px);
+  box-shadow: 0 20px 55px rgba(20, 20, 20, 0.16);
 }
 
 .ticket-card.aberto {
   border-left-color: #f2a900;
+  transition: 0.3s ease;
 }
 
 .ticket-card.em-andamento {
@@ -154,6 +161,11 @@
   background: #f2a900;
   color: #fff;
   font-weight: 800;
+  transition: 0.3s ease;
+}
+
+button:hover{
+  transform: scale(1.05);
 }
 
 .botoes .danger-button {
@@ -179,7 +191,9 @@
   justify-content: center;
   padding: 20px;
   background: rgba(0, 0, 0, 0.62);
+  animation: fadeInOverlay 0.25s ease-out forwards;
 }
+
 
 .modal,
 .modal3 {
@@ -191,6 +205,7 @@
   background: #fff;
   color: #171717;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  animation: entrarModal 0.3s ease
 }
 
 .modal h2,
@@ -234,14 +249,24 @@ select.resolvido {
   border-left: 5px solid #16a34a;
 }
 
-@media (max-width: 920px) {
-  .tickets-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+@keyframes fadeInOverlay {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
   }
 }
 
-@media (max-width: 640px) {
-  .tickets-grid {
-    grid-template-columns: 1fr;
+
+@keyframes entrarModal {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
   }
 }

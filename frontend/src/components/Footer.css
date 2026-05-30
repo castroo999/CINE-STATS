@@ -1,45 +1,89 @@
 .footer {
   width: 100%;
+  background-color: #111111;
+  padding: 40px 20px 20px 20px;
+  font-family: sans-serif;
   margin-top: 72px;
-  padding: 36px 20px;
-  background: #141414;
-  color: #fff;
 }
 
-.contato {
-  width: min(1180px, 100%);
+.footer-container {
+  max-width: 1200px;
   margin: 0 auto;
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
   justify-content: space-between;
-  gap: 28px;
-  flex-wrap: wrap;
+  gap: 40px;
 }
 
-.contato h2 {
-  margin: 0;
-  font-size: 24px;
+.footer-comeco h2 {
+  color: #fff;
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
 }
 
-.contatos {
-  display: flex;
-  gap: 28px;
-  flex-wrap: wrap;
+.footer-comeco h2 span {
+  color: #e4003a;
+}
+
+.footer-comeco p {
+  color: #b9bec7;
+  font-size: 14px;
+  max-width: 390px;
+  line-height: 1.5;
 }
 
 .footer-column {
-  display: grid;
-  gap: 10px;
-  min-width: 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  min-width: 200px;
 }
 
 .footer-column h3 {
-  margin: 0 0 4px;
+  color: #e4003a;
+  font-size: 16px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
 }
 
-.footer-column span {
+.footer-link {
   display: flex;
   align-items: center;
   gap: 10px;
-  color: #d8d8d8;
+  color: #b9bec7;
+  text-decoration: none;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+
+.footer-link.instagram-hover:hover {
+  color: #f7507e;
+}
+
+.footer-link.whatsapp-hover:hover {
+  color: #25d366;
+}
+
+
+.footer-bottom {
+  max-width: 1200px;
+  margin: 40px auto 0 auto;
+  padding-top: 20px;
+  border-top: 1px solid #222222;
+  text-align: center;
+}
+
+.footer-bottom p {
+  color: #555555;
+  font-size: 12px;
 }

@@ -7,7 +7,6 @@ import CadastroUser from "./pages/CadastroUser";
 import Cadastro from "./pages/Cadastro";
 import CardInicial from "./components/CardInicial";
 import VerChamado from "./pages/VerChamado";
-import Modelos from "./pages/Modelos";
 import QuemSomos from "./pages/QuemSomos";
 
 export default function App() {
@@ -42,15 +41,6 @@ export default function App() {
           element={
             <ProtectedRoute>
               <VerChamado />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/modelos"
-          element={
-            <ProtectedRoute>
-              <Modelos />
             </ProtectedRoute>
           }
         />

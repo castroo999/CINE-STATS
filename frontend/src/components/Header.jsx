@@ -5,10 +5,11 @@ import { useEffect, useState } from "react";
 
 function getUser() {
   try {
+    //pega o usuario logado
     const user = localStorage.getItem("user");
 
     if (!user) return null;
-
+    //pega somente o nome dele
     const parsed = JSON.parse(user);
 
     return typeof parsed === "object" && parsed.user ? parsed : null;
@@ -22,6 +23,7 @@ export default function Header() {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const navigate = useNavigate();
 
+  //função de logout
   function sair() {
     localStorage.clear();
     setUsuario(null);
@@ -30,6 +32,7 @@ export default function Header() {
     navigate("/");
   }
 
+  //atualiza altomaticamente o user logado no header
   useEffect(() => {
     function atualizarDados() {
       setToken(localStorage.getItem("token"));
@@ -47,8 +50,8 @@ export default function Header() {
     <header className="top-header">
       <div className="top-bar">
         <div>
-          <span className="brand-kicker">Plantamatica</span>
-          <h1>Bem-vindo, {usuario ? usuario.user : "visitante"}</h1>
+          <span className="plant">PLANTAMATICA</span>
+          <h1>Bem-Vindo, {usuario ? usuario.user : "visitante"}</h1>
         </div>
 
         <div className="perfil">
@@ -72,7 +75,6 @@ export default function Header() {
               <NavLink to="/dashboard">Mapa</NavLink>
               <NavLink to="/chamados">Abrir chamado</NavLink>
               <NavLink to="/ver_chamados">Chamados</NavLink>
-              <NavLink to="/modelos">Modelos</NavLink>
               <NavLink to="/quem-somos">Quem somos</NavLink>
             </>
           )}

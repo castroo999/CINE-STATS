@@ -37,7 +37,7 @@ export default function CadastroUser() {
       <form className="app-form" onSubmit={registrar}>
         <div className="form-heading">
           <span>Nova conta</span>
-          <h2>Crie seu acesso</h2>
+          <h2>Crie sua conta</h2>
         </div>
 
         <label>

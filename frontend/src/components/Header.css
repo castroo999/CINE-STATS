@@ -16,13 +16,12 @@
   padding: 16px 0;
 }
 
-.brand-kicker {
+.plant {
   display: block;
   margin-bottom: 4px;
   font-size: 12px;
   font-weight: 700;
   letter-spacing: 0;
-  text-transform: uppercase;
   color: #ffd166;
 }
 

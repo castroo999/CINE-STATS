@@ -42,6 +42,7 @@ export default function Cadastro() {
       setDescricao("");
       setLocal("");
       setPrioridade("");
+      
     } catch (error) {
       console.error(error);
       alert("Erro ao abrir chamado");
