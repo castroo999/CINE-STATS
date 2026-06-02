@@ -17,6 +17,7 @@ export default function Cadastro() {
   async function enviar(e) {
     e.preventDefault();
 
+    //alerta e nao deixa ficar campo sem ser preenchido
     if (!titulo || !descricao || !local || !prioridade) {
       alert("Preencha todos os campos!");
       return;
@@ -25,6 +26,7 @@ export default function Cadastro() {
     setLoading(true);
 
     try {
+      //pega dados da api
       await api.post("/chamados", {
         titulo,
         descricao,
@@ -34,6 +36,7 @@ export default function Cadastro() {
 
       setModalAberto(true);
 
+      //dps de 5 segundos o modal fecha
       setTimeout(() => {
         setModalAberto(false);
       }, 5000);

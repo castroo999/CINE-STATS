@@ -5,26 +5,43 @@ import { CgSmileNeutral } from "react-icons/cg";
 import { ImAngry } from "react-icons/im";
 import api from "../services/Api";
 
+//transforma o status em uma classe css
 function getStatusClass(status = "") {
   return status.replace(/\s+/g, "-").toLowerCase();
 }
 
 export default function VerChamado() {
+  //pega os dados do usuario logado
   const usuarioLogado = JSON.parse(localStorage.getItem("user") || "null");
+
+  //controle dos modais
   const [modalAberto, setModalAberto] = useState(false);
   const [modalDeletar, setModalDeletar] = useState(false);
   const [modalSucessoEditar, setModalSucessoEditar] = useState(false);
+
+  //guarda o id do chamado que esta sendo editado
   const [editandoId, setEditandoId] = useState(null);
+
+  //campos do formulario de edição
   const [titulo, setTitulo] = useState("");
   const [descricao, setDescricao] = useState("");
   const [local, setLocal] = useState("");
   const [prioridade, setPrioridade] = useState("");
   const [status, setStatus] = useState("");
+
+  //guarda o id do chamado que sera deletado
   const [idParaDeletar, setIdParaDeletar] = useState(null);
+
+  //lista de chamados vinda do backend
   const [chamados, setChamados] = useState([]);
+
+  //texto digitado no filtro
   const [filtro, setFiltro] = useState("");
+
+  //pega o token salvo no localStorage
   const token = localStorage.getItem("token");
 
+  //filtra os chamados conforme o texto digitado
   const chamadosFiltrados = chamados.filter((item) => {
     const texto = filtro.toLowerCase();
 
@@ -35,10 +52,14 @@ export default function VerChamado() {
     );
   });
 
+  //carrega os chamados quando a pagina abrir
   useEffect(() => {
     async function carregarChamados() {
       try {
+        //busca os chamados cadastrados
         const response = await api.get("/chamados");
+
+        //garante que sempre sera um array
         setChamados(Array.isArray(response.data) ? response.data : []);
       } catch (error) {
         console.error(error);
@@ -48,9 +69,13 @@ export default function VerChamado() {
     carregarChamados();
   }, [token]);
 
+  //deleta um chamado pelo id
   async function deletar(id) {
     try {
+      //remove do banco
       await api.delete(`/chamados/${id}`);
+
+      //remove da tela sem recarregar a pagina
       setChamados((prev) => prev.filter((item) => item.id !== id));
     } catch (error) {
       console.log(error);
@@ -58,16 +83,23 @@ export default function VerChamado() {
     }
   }
 
+  //abre o modal e preenche os campos
   function abrirModal(item) {
+    //salva o id que sera editado
     setEditandoId(item.id);
+
+    //preenche os inputs com os dados atuais
     setTitulo(item.titulo);
     setDescricao(item.descricao);
     setLocal(item.local);
     setPrioridade(item.prioridade);
     setStatus(item.status);
+
+    //abre o modal
     setModalAberto(true);
   }
 
+  //fecha todos os modais
   function fecharModal() {
     setModalAberto(false);
     setModalDeletar(false);
@@ -75,8 +107,10 @@ export default function VerChamado() {
     setEditandoId(null);
   }
 
+  //edita um chamado existente
   async function editar() {
     try {
+      //envia os novos dados para o backend
       await api.put(`/chamados/${editandoId}`, {
         titulo,
         descricao,
@@ -85,6 +119,7 @@ export default function VerChamado() {
         status,
       });
 
+      //atualiza a lista sem precisar dar reload
       setChamados((prev) =>
         prev.map((item) =>
           item.id === editandoId
@@ -100,7 +135,10 @@ export default function VerChamado() {
         ),
       );
 
+      //fecha o modal de edição
       fecharModal();
+
+      //abre modal de sucesso
       setModalSucessoEditar(true);
     } catch (error) {
       console.log(error);
@@ -183,7 +221,7 @@ export default function VerChamado() {
 
                   <button
                     type="button"
-                    className="danger-button"
+                    className="button-deletar"
                     onClick={() => {
                       setIdParaDeletar(item.id);
                       setModalDeletar(true);

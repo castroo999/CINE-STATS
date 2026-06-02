@@ -9,7 +9,7 @@ export default function Footer() {
       <div className="footer-container">
         <div className="footer-comeco">
           <h2>
-            PLANTA<span>MATICA</span>
+            SESI<span>TECH</span>
           </h2>
           <p>Gestão de manutenção escolar para ambientes mais organizados.</p>
         </div>

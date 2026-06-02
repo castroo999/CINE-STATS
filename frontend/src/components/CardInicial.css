@@ -26,11 +26,12 @@
 .map-panel {
   overflow: hidden;
   border-radius: 8px;
+  width: 1000px;
   background: #fff;
   box-shadow: 0 16px 45px rgba(20, 20, 20, 0.12);
 }
 
 .map-panel img {
-  width: 100%;
-  height: auto;
+  width: 1000px;
+  height: 900px;
 }

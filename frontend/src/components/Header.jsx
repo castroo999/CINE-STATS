@@ -1,6 +1,6 @@
 import "./Header.css";
 import { NavLink, useNavigate } from "react-router-dom";
-import logo from "../assets/logo.png";
+import logo from "../assets/favicon.png";
 import { useEffect, useState } from "react";
 
 function getUser() {
@@ -39,6 +39,7 @@ export default function Header() {
       setUsuario(getUser());
     }
 
+    //atualiza os dados automaticamente
     window.addEventListener("userChanged", atualizarDados);
 
     return () => {
@@ -50,7 +51,7 @@ export default function Header() {
     <header className="top-header">
       <div className="top-bar">
         <div>
-          <span className="plant">PLANTAMATICA</span>
+          <span className="plant">SESI-tech</span>
           <h1>Bem-Vindo, {usuario ? usuario.user : "visitante"}</h1>
         </div>
 

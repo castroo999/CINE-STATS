@@ -168,7 +168,7 @@ button:hover{
   transform: scale(1.05);
 }
 
-.botoes .danger-button {
+.botoes .button-deletar {
   background: #b6002b;
 }
 

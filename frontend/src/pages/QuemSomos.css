@@ -1,4 +1,4 @@
-.about-page {
+.quem-somos {
   width: min(1180px, calc(100% - 32px));
   margin: 0 auto;
   padding: 56px 0 16px;
@@ -6,7 +6,7 @@
   gap: 48px;
 }
 
-.about-hero {
+.descricao {
   display: grid;
   gap: 14px;
   padding: 36px;
@@ -15,22 +15,22 @@
   box-shadow: 0 16px 45px rgba(20, 20, 20, 0.1);
 }
 
-.about-hero span,
-.team-heading span {
+.descricao span,
+.time-topo span {
   color: #b6002b;
   font-size: 13px;
   font-weight: 800;
   text-transform: uppercase;
 }
 
-.about-hero h2,
-.team-heading h1 {
+.descricao h2,
+.time-topo h1 {
   margin: 0;
   font-size: clamp(32px, 5vw, 48px);
   line-height: 1.1;
 }
 
-.about-hero p {
+.descricao p {
   max-width: 920px;
   margin: 0;
   color: #4b5563;
@@ -38,23 +38,23 @@
   line-height: 1.7;
 }
 
-.team {
+.time {
   display: grid;
   gap: 24px;
 }
 
-.team-heading {
+.time-topo {
   display: grid;
   gap: 8px;
 }
 
-.team-cards {
+.time-cards {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 20px;
 }
 
-.team-card {
+.time-card {
   display: grid;
   gap: 12px;
   justify-items: center;
@@ -65,26 +65,20 @@
   box-shadow: 0 16px 45px rgba(20, 20, 20, 0.1);
 }
 
-.team-card img {
+.time-card img {
   width: 170px;
   height: 170px;
   border-radius: 8px;
   object-fit: cover;
 }
 
-.team-card h3 {
+.time-card h3 {
   margin: 0;
   font-size: 22px;
 }
 
-.team-card p {
+.time-card p {
   margin: 0;
   color: #4b5563;
   line-height: 1.5;
-}
-
-@media (max-width: 840px) {
-  .team-cards {
-    grid-template-columns: 1fr;
-  }
 }

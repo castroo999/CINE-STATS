@@ -23,27 +23,27 @@ const equipe = [
 
 export default function QuemSomos() {
   return (
-    <section className="about-page">
-      <div className="about-hero">
+    <section className="quem-somos">
+      <div className="descricao">
         <span>Sobre o projeto</span>
         <h2>Quem somos?</h2>
 
         <p>
-          A nossa ideia e a continuacao do projeto Plantamatica, uma plataforma
-          onde a comunidade do SESI 428 ajuda a equipe de manutencao da escola
+          A nossa ideia do projeto SESI-tech é uma plataforma
+          onde a comunidade do SESI 428 ajuda a equipe de manutenção da escola
           informando problemas, quando ocorreram e a gravidade de cada situacao.
         </p>
       </div>
 
-      <div className="team">
-        <div className="team-heading">
+      <div className="time">
+        <div className="time-topo">
           <span>Equipe</span>
           <h1>Dev Manutencao</h1>
         </div>
 
-        <div className="team-cards">
+        <div className="time-cards">
           {equipe.map((pessoa) => (
-            <article className="team-card" key={pessoa.nome}>
+            <article className="time-card" key={pessoa.nome}>
               <img src={pessoa.foto} alt={pessoa.nome} />
               <h3>{pessoa.nome}</h3>
               <p>{pessoa.cargo}</p>

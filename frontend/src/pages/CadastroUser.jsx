@@ -11,6 +11,7 @@ export default function CadastroUser() {
   async function registrar(e) {
     e.preventDefault();
 
+    //nao deixa ficar campo sem ser preenchido
     if (!user || !password) {
       alert("Preencha todos os campos!");
       return;
@@ -26,6 +27,7 @@ export default function CadastroUser() {
       setUser("");
       setPassword("");
       navigate("/login");
+      
     } catch (error) {
       console.error(error.response?.data || error.message);
       alert("Erro ao cadastrar usuario");
@@ -34,8 +36,8 @@ export default function CadastroUser() {
 
   return (
     <section className="form-page">
-      <form className="app-form" onSubmit={registrar}>
-        <div className="form-heading">
+      <form className="formulario" onSubmit={registrar}>
+        <div className="form-topo">
           <span>Nova conta</span>
           <h2>Crie sua conta</h2>
         </div>
