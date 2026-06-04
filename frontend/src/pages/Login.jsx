@@ -18,7 +18,7 @@ export default function Login() {
       toast.warning("Preencha todos os campos por favor!");
       return;
     }else{
-      toast.success("Login feito com sucesso");
+      toast.success("Login feito com sucesso carregando...");
     }
 
     try {

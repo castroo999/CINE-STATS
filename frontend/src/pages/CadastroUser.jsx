@@ -1,6 +1,8 @@
 import api from "../services/Api.js";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+
 import "./Cadastro.css";
 
 export default function CadastroUser() {
@@ -13,7 +15,7 @@ export default function CadastroUser() {
 
     //nao deixa ficar campo sem ser preenchido
     if (!user || !password) {
-      alert("Preencha todos os campos!");
+      toast.warning("Preencha todos os campos!");
       return;
     }
 
@@ -27,10 +29,12 @@ export default function CadastroUser() {
       setUser("");
       setPassword("");
       navigate("/login");
+
+      toast.success("Usuario cadastrado com sucesso")
       
     } catch (error) {
       console.error(error.response?.data || error.message);
-      alert("Erro ao cadastrar usuario");
+      toast.warning("Erro ao cadastrar usuario");
     }
   }
 
@@ -45,7 +49,7 @@ export default function CadastroUser() {
         <label>
           Usuario
           <input
-            placeholder="Escolha um usuario"
+            placeholder="Cadastre um usuario"
             value={user}
             onChange={(e) => setUser(e.target.value)}
           />

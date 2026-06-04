@@ -4,8 +4,7 @@ import { FaRegSmile } from "react-icons/fa";
 import { CgSmileNeutral } from "react-icons/cg";
 import { ImAngry } from "react-icons/im";
 import api from "../services/Api";
-// import { toast } from "react-toastify";
-
+import { toast } from "react-toastify";
 
 //transforma o status em uma classe css
 function getStatusClass(status = "") {
@@ -16,11 +15,6 @@ export default function VerChamado() {
   //pega os dados do usuario logado
   const usuarioLogado = JSON.parse(localStorage.getItem("user") || "null");
 
-  //controle dos modais
-  const [modalAberto, setModalAberto] = useState(false);
-  const [modalDeletar, setModalDeletar] = useState(false);
-  const [modalSucessoEditar, setModalSucessoEditar] = useState(false);
-
   //guarda o id do chamado que esta sendo editado
   const [editandoId, setEditandoId] = useState(null);
 
@@ -30,6 +24,9 @@ export default function VerChamado() {
   const [local, setLocal] = useState("");
   const [prioridade, setPrioridade] = useState("");
   const [status, setStatus] = useState("");
+
+  //controle do modal de exclusão
+  const [modalDeletar, setModalDeletar] = useState(false);
 
   //guarda o id do chamado que sera deletado
   const [idParaDeletar, setIdParaDeletar] = useState(null);
@@ -79,9 +76,12 @@ export default function VerChamado() {
 
       //remove da tela sem recarregar a pagina
       setChamados((prev) => prev.filter((item) => item.id !== id));
+
+      toast.success("Chamado deletado com sucesso!");
     } catch (error) {
       console.log(error);
-      alert("Erro ao deletar chamado");
+
+      toast.error("Erro ao deletar chamado");
     }
   }
 
@@ -96,16 +96,10 @@ export default function VerChamado() {
     setLocal(item.local);
     setPrioridade(item.prioridade);
     setStatus(item.status);
-
-    //abre o modal
-    setModalAberto(true);
   }
 
-  //fecha todos os modais
+  //fecha modal
   function fecharModal() {
-    setModalAberto(false);
-    setModalDeletar(false);
-    setModalSucessoEditar(false);
     setEditandoId(null);
   }
 
@@ -137,14 +131,14 @@ export default function VerChamado() {
         ),
       );
 
-      //fecha o modal de edição
-      fecharModal();
+      toast.success("Chamado atualizado com sucesso!");
 
-      //abre modal de sucesso
-      setModalSucessoEditar(true);
+      //fecha o modal
+      setEditandoId(null);
     } catch (error) {
       console.log(error);
-      alert("Erro ao editar chamado");
+
+      toast.error("Erro ao editar chamado");
     }
   }
 
@@ -238,27 +232,24 @@ export default function VerChamado() {
         })}
       </ul>
 
-      {chamadosFiltrados.length === 0 && (
-        <div className="vazio">Nenhum chamado encontrado.</div>
-      )}
-
       {modalDeletar && (
-        <div className="overlay4" onClick={fecharModal}>
+        <div className="overlay4" onClick={() => setModalDeletar(false)}>
           <div className="modal3" onClick={(e) => e.stopPropagation()}>
             <h3>Deseja realmente deletar este chamado?</h3>
 
             <div className="botoes">
               <button
                 type="button"
+                className="deletar-modal"
                 onClick={() => {
                   deletar(idParaDeletar);
-                  fecharModal();
+                  setModalDeletar(false);
                 }}
               >
                 Confirmar
               </button>
 
-              <button type="button" onClick={fecharModal}>
+              <button type="button" onClick={() => setModalDeletar(false)}>
                 Cancelar
               </button>
             </div>
@@ -266,18 +257,11 @@ export default function VerChamado() {
         </div>
       )}
 
-      {modalSucessoEditar && (
-        <div className="overlay4" onClick={fecharModal}>
-          <div className="modal3" onClick={(e) => e.stopPropagation()}>
-            <h3>Chamado atualizado com sucesso!</h3>
-            <button type="button" onClick={fecharModal}>
-              Fechar
-            </button>
-          </div>
-        </div>
+      {chamadosFiltrados.length === 0 && (
+        <div className="vazio">Nenhum chamado encontrado.</div>
       )}
 
-      {modalAberto && (
+      {editandoId && (
         <div className="overlay2" onClick={fecharModal}>
           <div className="modal" onClick={(e) => e.stopPropagation()}>
             <h2>Editar chamado</h2>

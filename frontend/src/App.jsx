@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import AppLayout from "./layouts/AppLayout";
+import AdminRoute from "./components/Admin_Route";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
@@ -8,6 +9,7 @@ import Cadastro from "./pages/Cadastro";
 import CardInicial from "./components/CardInicial";
 import VerChamado from "./pages/VerChamado";
 import QuemSomos from "./pages/QuemSomos";
+import Dash from "./pages/Dashboard";
 
 export default function App() {
   return (
@@ -44,6 +46,15 @@ export default function App() {
               <VerChamado />
             </ProtectedRoute>
           }
+        />
+
+        <Route
+        path="/dashboard_admin"
+        element={ 
+          <AdminRoute>
+            <Dash />
+          </AdminRoute>
+        }
         />
       </Route>
     </Routes>

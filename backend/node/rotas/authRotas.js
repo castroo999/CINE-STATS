@@ -47,7 +47,7 @@ export async function authRoutes(server, db) {
       );
 
       return reply.status(201).send({
-        message: "Usuário cadastrado com sucesso!"
+        
       });
 
     } catch (error) {

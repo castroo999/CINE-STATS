@@ -2,6 +2,7 @@ import "./Header.css";
 import { NavLink, useNavigate } from "react-router-dom";
 import logo from "../assets/favicon.png";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 function getUser() {
   try {
@@ -30,6 +31,8 @@ export default function Header() {
     setToken(null);
     window.dispatchEvent(new Event("userChanged"));
     navigate("/");
+
+    toast.success("Você saiu da sua conta com sucesso!");
   }
 
   //atualiza altomaticamente o user logado no header
@@ -77,6 +80,10 @@ export default function Header() {
               <NavLink to="/chamados">Abrir chamado</NavLink>
               <NavLink to="/ver_chamados">Chamados</NavLink>
               <NavLink to="/quem-somos">Quem somos</NavLink>
+
+              {usuario?.role === "superadmin" && (
+                <NavLink to="/dashboard_admin">Dashboard Admin</NavLink>
+              )}
             </>
           )}
         </div>

@@ -1,7 +1,7 @@
 import fastify from "fastify";
 import cors from "@fastify/cors";
 import "dotenv/config";
-
+import { adminRoutes } from "./rotas/adminRotas.js";
 import { initDB } from "./db/connect.js";
 import { authRoutes } from "./rotas/authRotas.js";
 import { chamadosRoutes } from "./rotas/chamadosRotas.js";
@@ -12,6 +12,11 @@ const server = fastify();
 // conecta banco
 const db = await initDB();
 
+//rotas
+authRoutes(server, db);
+chamadosRoutes(server, db);
+adminRoutes(server, db);
+
 // cors
 await server.register(cors, {
   origin: "*",
@@ -19,9 +24,6 @@ await server.register(cors, {
   allowedHeaders: ["Content-Type", "Authorization"],
 });
 
-// rotas
-authRoutes(server, db);
-chamadosRoutes(server, db);
 
 // erro global
 server.setErrorHandler((error, request, reply) => {

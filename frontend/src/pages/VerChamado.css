@@ -172,6 +172,10 @@ button:hover{
   background: #b6002b;
 }
 
+.modal3 .deletar-modal{
+  background: #16a34a;
+}
+
 .vazio {
   padding: 28px;
   border: 1px dashed #c7cbd1;
