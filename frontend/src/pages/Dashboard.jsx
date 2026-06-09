@@ -9,6 +9,7 @@ import {
   Tooltip,
   Legend,
 } from "recharts";
+
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from "recharts";
 import api from "../services/Api";
 
@@ -23,7 +24,7 @@ export default function Dash() {
 
   const usuarioLogado = JSON.parse(localStorage.getItem("user") || "null");
 
-  const COLORS = ["#ef4444", "#f59e0b", "#22c55e"];
+  const COLORS = ["#f2a900", "#2563eb", "#22c55e"];
 
   const dadosGrafico = [
     {

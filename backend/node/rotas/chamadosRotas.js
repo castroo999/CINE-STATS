@@ -109,7 +109,7 @@ export async function chamadosRoutes(server, db) {
 
       try {
 
-        if (request.user.role !== "superadmin" ||
+        if (request.user.role !== "superadmin" &&
             request.user.role !== "admin"
         ) {
           return reply.status(403).send({
@@ -164,7 +164,7 @@ export async function chamadosRoutes(server, db) {
 
       try {
 
-        if (request.user.role !== "superadmin" ||
+        if (request.user.role !== "superadmin" &&
             request.user.role !== "admin"
         ) {
           return reply.status(403).send({

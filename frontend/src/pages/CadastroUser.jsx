@@ -20,18 +20,16 @@ export default function CadastroUser() {
     }
 
     try {
-      const response = await api.post("/registrar", {
+      await api.post("/registrar", {
         user,
         password,
       });
 
-      alert(response.data.message);
       setUser("");
       setPassword("");
       navigate("/login");
 
-      toast.success("Usuario cadastrado com sucesso")
-      
+      toast.success("Usuario cadastrado com sucesso");
     } catch (error) {
       console.error(error.response?.data || error.message);
       toast.warning("Erro ao cadastrar usuario");
