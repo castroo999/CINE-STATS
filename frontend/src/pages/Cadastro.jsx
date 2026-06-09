@@ -66,7 +66,7 @@ export default function Cadastro() {
         </label>
 
         <label>
-          Local
+          Local:
           <input
             placeholder="Ex: Bloco 1, sala 3"
             value={local}
