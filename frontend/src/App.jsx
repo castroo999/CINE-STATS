@@ -8,7 +8,6 @@ import CadastroUser from "./pages/CadastroUser";
 import Cadastro from "./pages/Cadastro";
 import CardInicial from "./components/CardInicial";
 import VerChamado from "./pages/VerChamado";
-import QuemSomos from "./pages/QuemSomos";
 import Dash from "./pages/Dashboard";
 
 export default function App() {
@@ -19,7 +18,6 @@ export default function App() {
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/cadastro" element={<CadastroUser />} />
-        <Route path="/quem-somos" element={<QuemSomos />} />
 
         <Route
           path="/dashboard"
