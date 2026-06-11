@@ -2,28 +2,11 @@ import { connectDB } from "../banco.js";
 import { randomUUID } from "node:crypto";
 import bcrypt from "bcrypt";
 
-// conecta banco
 export async function initDB() {
-
   const db = await connectDB();
 
-  // tabela chamados
   await db.exec(`
-    CREATE TABLE IF NOT EXISTS chamados (
-      id TEXT PRIMARY KEY,
-      titulo TEXT,
-      descricao TEXT,
-      local TEXT,
-      prioridade TEXT,
-      user_id TEXT,
-      status TEXT DEFAULT 'aberto',
-      criado_em TEXT
-    )
-  `);
-
-  // tabela usuarios
-  await db.exec(`
-    CREATE TABLE IF NOT EXISTS user(
+    CREATE TABLE IF NOT EXISTS user (
       id TEXT PRIMARY KEY,
       user TEXT,
       password TEXT,
@@ -31,14 +14,26 @@ export async function initDB() {
     )
   `);
 
-  // admin automatico
+  await db.exec(`
+    CREATE TABLE IF NOT EXISTS filmes_vistos (
+      id TEXT PRIMARY KEY,
+      user_id TEXT NOT NULL,
+      movie_id INTEGER NOT NULL,
+      movie_title TEXT NOT NULL,
+      poster_path TEXT,
+      rating REAL,
+      review TEXT,
+      watched_at TEXT,
+      created_at TEXT
+    )
+  `);
+
   const adminExiste = await db.get(
     "SELECT * FROM user WHERE user = ?",
     ["castro"]
   );
 
   if (!adminExiste) {
-
     const id = randomUUID();
 
     const senha = await bcrypt.hash(

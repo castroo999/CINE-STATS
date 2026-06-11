@@ -1,10 +1,10 @@
 import fastify from "fastify";
 import cors from "@fastify/cors";
 import "dotenv/config";
-import { adminRoutes } from "./rotas/adminRotas.js";
+
 import { initDB } from "./db/connect.js";
 import { authRoutes } from "./rotas/authRotas.js";
-import { chamadosRoutes } from "./rotas/chamadosRotas.js";
+import { filmesRoutes } from "./rotas/filmesRotas.js";
 
 // cria servidor
 const server = fastify();
@@ -12,10 +12,9 @@ const server = fastify();
 // conecta banco
 const db = await initDB();
 
-//rotas
+// rotas
 authRoutes(server, db);
-chamadosRoutes(server, db);
-adminRoutes(server, db);
+filmesRoutes(server, db);
 
 // cors
 await server.register(cors, {
@@ -23,7 +22,6 @@ await server.register(cors, {
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
 });
-
 
 // erro global
 server.setErrorHandler((error, request, reply) => {
