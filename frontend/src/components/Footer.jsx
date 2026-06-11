@@ -9,9 +9,9 @@ export default function Footer() {
       <div className="footer-container">
         <div className="footer-comeco">
           <h2>
-            SESI<span>TECH</span>
+            CINE<span>-STATS</span>
           </h2>
-          <p>Gestão de manutenção escolar para ambientes mais organizados.</p>
+          <p>Veja suas estatisticas sobre seus filmes favoritos.</p>
         </div>
 
         <div className="footer-column">
@@ -47,7 +47,7 @@ export default function Footer() {
 
       {/* Direitos Reservados */}
       <div className="footer-bottom">
-        <p>&copy; 2026 Plantamática. Todos os direitos reservados.</p>
+        <p>&copy; 2026 CINE-STATS. Todos os direitos reservados.</p>
       </div>
     </footer>
   );

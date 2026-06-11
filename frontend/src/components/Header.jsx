@@ -1,6 +1,6 @@
 import "./Header.css";
 import { NavLink, useNavigate } from "react-router-dom";
-import logo from "../assets/favicon.png";
+import logo from "../assets/logo_cine.png";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
@@ -24,8 +24,6 @@ export default function Header() {
   const [token, setToken] = useState(localStorage.getItem("token"));
   const navigate = useNavigate();
 
-  //verifica se é adm
-  const isAdmin = usuario?.role === "admin" || usuario?.role === "superadmin";
 
   //função de logout
   function sair() {
@@ -62,7 +60,7 @@ export default function Header() {
         </div>
 
         <div className="perfil">
-          <img src={logo} alt="Plantamatica" />
+          <img src={logo} alt="CINE-STATS" />
         </div>
       </div>
 
@@ -73,20 +71,14 @@ export default function Header() {
               <NavLink to="/">Inicio</NavLink>
               <NavLink to="/login">Login</NavLink>
               <NavLink to="/cadastro">Cadastrar</NavLink>
-              <NavLink to="/quem-somos">Quem somos</NavLink>
             </>
           )}
 
           {token && (
             <>
               <NavLink to="/dashboard">Mapa</NavLink>
-              <NavLink to="/chamados">Abrir chamado</NavLink>
-              <NavLink to="/ver_chamados">Chamados</NavLink>
-              <NavLink to="/quem-somos">Quem somos</NavLink>
-
-              {isAdmin && (
-                <NavLink to="/dashboard_admin">Dashboard Admin</NavLink>
-              )}
+              <NavLink to="/chamados">Seu Perfil</NavLink>
+              <NavLink to="/ver_chamados">Suas Avaliações</NavLink>
             </>
           )}
         </div>

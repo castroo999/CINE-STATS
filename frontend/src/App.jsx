@@ -1,18 +1,15 @@
 import { Route, Routes } from "react-router-dom";
 import AppLayout from "./layouts/AppLayout";
-import AdminRoute from "./components/Admin_Route";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import CadastroUser from "./pages/CadastroUser";
 import Cadastro from "./pages/Cadastro";
-import CardInicial from "./components/CardInicial";
-import VerChamado from "./pages/VerChamado";
-import Dash from "./pages/Dashboard";
+// import VerChamado from "./pages/Perfil";
+// import Perfil from "./pages/Perfil";
 
 export default function App() {
   return (
-    <>
     <Routes>
       <Route element={<AppLayout />}>
         <Route path="/" element={<Home />} />
@@ -20,42 +17,23 @@ export default function App() {
         <Route path="/cadastro" element={<CadastroUser />} />
 
         <Route
-          path="/dashboard"
+          path="/seu_perfil"
           element={
             <ProtectedRoute>
-              <CardInicial />
+              {/* <Perfil /> */}
             </ProtectedRoute>
           }
         />
 
         <Route
-          path="/chamados"
+          path="/suas_avaliacoes"
           element={
             <ProtectedRoute>
-              <Cadastro />
+              {/* <VerChamado /> */}
             </ProtectedRoute>
           }
-        />
-
-        <Route
-          path="/ver_chamados"
-          element={
-            <ProtectedRoute>
-              <VerChamado />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-        path="/dashboard_admin"
-        element={ 
-          <AdminRoute>
-            <Dash />
-          </AdminRoute>
-        }
         />
       </Route>
     </Routes>
-    </>
   );
 }

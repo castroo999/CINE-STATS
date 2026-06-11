@@ -1,34 +1,98 @@
+import { useState, useEffect } from "react";
+import {
+  buscarFilmes,
+  filmesPopulares,
+  filmesEmCartaz,
+} from "../services/tmdb";
+import CatalogoFilmes from "../components/CatalogoFilmes";
 import "./Home.css";
-import logo from "../assets/logo.png";
-import { Link } from "react-router-dom";
 
 export default function Home() {
+  const [busca, setBusca] = useState("");
+  const [filmes, setFilmes] = useState([]);
+
+  const [populares, setPopulares] = useState([]);
+  const [emCartaz, setEmCartaz] = useState([]);
+
+  useEffect(() => {
+    async function carregar() {
+      const popularesData = await filmesPopulares();
+      const cartazData = await filmesEmCartaz();
+
+      setPopulares(popularesData);
+      setEmCartaz(cartazData);
+    }
+
+    carregar();
+  }, []);
+
+  async function pesquisar() {
+    if (!busca.trim()) return;
+
+    const resultado = await buscarFilmes(busca);
+
+    setFilmes(resultado);
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }
+
+  function limpar() {
+    setBusca("");
+    setFilmes([]);
+  }
+
   return (
-    <section className="home-page">
-      <div className="home-conteudo">
-        <div className="home">
-          <span className="home-label">Manutencao escolar</span>
-          <h2>Bem-vindo ao SESI-tech</h2>
-          <p>
-            Registre chamados, acompanhe manutencoes e ajude a organizar os
-            cuidados com os espacos da escola.
-          </p>
+    <div className="home-container">
+      <h1 className="home-title"> Cine Stats</h1>
 
-          <div className="home-link">
-            <Link className="login" to="/login">
-              Fazer login
-            </Link>
+      <div className="busca-container">
+        <input
+          className="busca-input"
+          value={busca}
+          onChange={(e) => setBusca(e.target.value)}
+          placeholder="Digite um filme..."
+        />
 
-            <Link className="criar" to="/cadastro">
-              Criar conta
-            </Link>
-          </div>
-        </div>
+        <button className="btn btn-buscar" onClick={pesquisar}>
+          Buscar
+        </button>
 
-        <div className="home-logo-card">
-          <img src={logo} alt="Logo Plantamatica" />
-        </div>
+        <button className="btn btn-limpar" onClick={limpar}>
+          Limpar
+        </button>
       </div>
-    </section>
+
+      {filmes.length > 0 ? (
+        <>
+          <h2 className="titulo-catalogo">Resultados para "{busca}"</h2>
+
+          <div className="filmes-container">
+            {filmes
+              .filter((filme) => filme.poster_path)
+              .map((filme) => (
+                <div className="poster-filme" key={filme.id}>
+                  <img
+                    src={`https://image.tmdb.org/t/p/w500${filme.poster_path}`}
+                    alt={filme.title}
+                  />
+
+                  <h3>{filme.title}</h3>
+
+                  <p>{filme.release_date?.slice(0, 4)}</p>
+                </div>
+              ))}
+          </div>
+        </>
+      ) : (
+        <>
+          <CatalogoFilmes titulo=" Filmes Populares" filmes={populares} />
+
+          <CatalogoFilmes titulo=" Em Cartaz" filmes={emCartaz} />
+        </>
+      )}
+    </div>
   );
 }

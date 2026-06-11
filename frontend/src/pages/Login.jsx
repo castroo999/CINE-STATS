@@ -47,7 +47,7 @@ export default function Login() {
       window.dispatchEvent(new Event("userChanged"));
 
       setTimeout(() => {
-        window.location.href = "/dashboard";
+        window.location.href = "/";
       }, 1500);
 
       setUser("");

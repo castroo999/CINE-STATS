@@ -1,7 +1,6 @@
 import fastify from "fastify";
 import cors from "@fastify/cors";
 import "dotenv/config";
-
 import { initDB } from "./db/connect.js";
 import { authRoutes } from "./rotas/authRotas.js";
 import { filmesRoutes } from "./rotas/filmesRotas.js";
