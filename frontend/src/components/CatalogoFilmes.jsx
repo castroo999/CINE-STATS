@@ -1,6 +1,6 @@
 import CardFilme from "./CardFilme";
 
-export default function CatalogoFilmes({ filmes, titulo }) {
+export default function CatalogoFilmes({ filmes, titulo, onFilmeClick }) {
   return (
     <section>
       <h2>{titulo}</h2>
@@ -10,6 +10,7 @@ export default function CatalogoFilmes({ filmes, titulo }) {
           <CardFilme
             key={filme.id}
             filme={filme}
+            onClick={() => onFilmeClick(filme)}
           />
         ))}
       </div>

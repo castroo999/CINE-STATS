@@ -5,12 +5,13 @@ import {
   filmesEmCartaz,
 } from "../services/tmdb";
 import CatalogoFilmes from "../components/CatalogoFilmes";
+import ModalFilmes from "../components/ModalFilmes";
 import "./Home.css";
 
 export default function Home() {
   const [busca, setBusca] = useState("");
   const [filmes, setFilmes] = useState([]);
-
+  const [filmeSelecionado, setFilmeSelecionado] = useState(null);
   const [populares, setPopulares] = useState([]);
   const [emCartaz, setEmCartaz] = useState([]);
 
@@ -73,7 +74,11 @@ export default function Home() {
             {filmes
               .filter((filme) => filme.poster_path)
               .map((filme) => (
-                <div className="poster-filme" key={filme.id}>
+                <div
+                  className="poster-filme"
+                  key={filme.id}
+                  onClick={() => setFilmeSelecionado(filme)}
+                >
                   <img
                     src={`https://image.tmdb.org/t/p/w500${filme.poster_path}`}
                     alt={filme.title}
@@ -88,11 +93,16 @@ export default function Home() {
         </>
       ) : (
         <>
-          <CatalogoFilmes titulo=" Filmes Populares" filmes={populares} />
+          <CatalogoFilmes titulo=" Filmes Populares" filmes={populares} onFilmeClick={setFilmeSelecionado} />
 
-          <CatalogoFilmes titulo=" Em Cartaz" filmes={emCartaz} />
+          <CatalogoFilmes titulo=" Em Cartaz" filmes={emCartaz} onFilmeClick={setFilmeSelecionado} />
         </>
       )}
+
+      <ModalFilmes
+        filme={filmeSelecionado}
+        fechar={() => setFilmeSelecionado(null)}
+      />
     </div>
   );
 }

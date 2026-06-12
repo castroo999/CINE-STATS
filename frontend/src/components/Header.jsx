@@ -55,7 +55,7 @@ export default function Header() {
     <header className="top-header">
       <div className="top-bar">
         <div>
-          <span className="plant">SESI-tech</span>
+          <span className="plant">CINE-STATS</span>
           <h1>Bem-Vindo, {usuario ? usuario.user : "visitante"}</h1>
         </div>
 
