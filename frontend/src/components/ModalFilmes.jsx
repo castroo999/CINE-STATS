@@ -1,5 +1,6 @@
 import "./ModalFilmes.css";
-import { X, Star } from "lucide-react";
+import { X } from "lucide-react";
+import { FaStar, FaRegStar } from "react-icons/fa6";
 
 export default function ModalFilmes({ filme, fechar }) {
   if (!filme) return null;
@@ -24,10 +25,11 @@ export default function ModalFilmes({ filme, fechar }) {
 
         <p>{filme.overview}</p>
 
-        <p className="estrelas">
-          {"⭐".repeat(estrelas)}
-          {"☆".repeat(5 - estrelas)}
-        </p>
+      <div className="estrelas">
+        {[...Array(5)].map((_, index) =>
+          index < estrelas ? <FaStar key={index} /> : <FaRegStar key={index} />,
+        )}
+      </div>
 
         <p>Lançamento: {filme.release_date}</p>
       </div>

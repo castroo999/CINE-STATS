@@ -20,8 +20,22 @@ export default function Home() {
       const popularesData = await filmesPopulares();
       const cartazData = await filmesEmCartaz();
 
-      setPopulares(popularesData);
-      setEmCartaz(cartazData);
+      const popularesFiltrados = popularesData.filter(
+        (filme) =>
+          filme.poster_path &&
+          filme.original_language === "en" &&
+          filme.vote_count > 500,
+      );
+
+      const cartazFiltrados = cartazData.filter(
+        (filme) =>
+          filme.poster_path &&
+          filme.original_language === "en" &&
+          filme.vote_count > 500,
+      );
+
+      setPopulares(popularesFiltrados);
+      setEmCartaz(cartazFiltrados);
     }
 
     carregar();
@@ -32,7 +46,13 @@ export default function Home() {
 
     const resultado = await buscarFilmes(busca);
 
-    setFilmes(resultado);
+    const filmesFiltrados = resultado.filter(
+      (filme) =>
+        filme.poster_path &&
+        filme.vote_count > 1000,
+    );
+
+    setFilmes(filmesFiltrados);
 
     window.scrollTo({
       top: 0,
@@ -93,9 +113,17 @@ export default function Home() {
         </>
       ) : (
         <>
-          <CatalogoFilmes titulo=" Filmes Populares" filmes={populares} onFilmeClick={setFilmeSelecionado} />
+          <CatalogoFilmes
+            titulo=" Filmes Populares"
+            filmes={populares}
+            onFilmeClick={setFilmeSelecionado}
+          />
 
-          <CatalogoFilmes titulo=" Em Cartaz" filmes={emCartaz} onFilmeClick={setFilmeSelecionado} />
+          <CatalogoFilmes
+            titulo=" Em Cartaz"
+            filmes={emCartaz}
+            onFilmeClick={setFilmeSelecionado}
+          />
         </>
       )}
 

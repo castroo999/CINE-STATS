@@ -1,37 +1,8 @@
-.dashboard-page {
-  width: min(1180px, calc(100% - 32px));
-  margin: 0 auto;
-  padding: 56px 0 16px;
-  display: grid;
-  gap: 24px;
-}
-
-.dashboard-heading {
-  display: grid;
-  gap: 8px;
-}
-
-.dashboard-heading h1 {
-  margin: 0;
-  font-size: clamp(32px, 5vw, 48px);
-  line-height: 1.1;
-}
-
-.dashboard-heading p {
-  margin: 0;
-  color: #4b5563;
-  font-size: 17px;
-}
-
-.map-panel {
-  overflow: hidden;
-  border-radius: 8px;
-  width: 1000px;
-  background: #fff;
-  box-shadow: 0 16px 45px rgba(20, 20, 20, 0.12);
-}
-
-.map-panel img {
-  width: 1000px;
-  height: 900px;
+.estrelas {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 8px;
+  color: gold;
+  margin-bottom: 35px;
 }

@@ -1,5 +1,9 @@
+import './CardFilme.css'
+import { FaStar } from "react-icons/fa6";
+import { FaRegStar } from "react-icons/fa";
+
 export default function CardFilme({ filme, onClick }) {
-  const estrelas = Math.round(filme.vote_average / 2);
+  const estrelas = Math.round((filme.vote_average || 0) / 2);
 
   return (
     <div className="poster-filme" onClick={onClick}>
@@ -10,10 +14,11 @@ export default function CardFilme({ filme, onClick }) {
 
       <h3>{filme.title}</h3>
 
-      <p className="estrelas">
-        {"⭐".repeat(estrelas)}
-        {"☆".repeat(5 - estrelas)}
-      </p>
+      <div className="estrelas">
+        {[...Array(5)].map((_, index) =>
+          index < estrelas ? <FaStar key={index} /> : <FaRegStar key={index} />,
+        )}
+      </div>
     </div>
   );
 }
