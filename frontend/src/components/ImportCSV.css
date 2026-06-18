@@ -1,0 +1,12 @@
+.import {
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(124, 139, 139);
+    height: 30px;
+    animation: 3s;
+}
+
+.import:hover{
+    transform: scale(1.05);
+}
+

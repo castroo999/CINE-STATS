@@ -1,9 +1,15 @@
+/* global process */
+
 import fastify from "fastify";
 import cors from "@fastify/cors";
 import "dotenv/config";
 import { initDB } from "./db/connect.js";
 import { authRoutes } from "./rotas/authRotas.js";
 import { filmesRoutes } from "./rotas/filmesRotas.js";
+import { userLetterboxd } from './rotas/LetterboxdRotas.js'
+import { userRota } from "./rotas/userRotas.js";
+import { ImportarCSV } from './rotas/ImportCSV.js';
+import multipart from "@fastify/multipart";
 
 // cria servidor
 const server = fastify();
@@ -11,16 +17,20 @@ const server = fastify();
 // conecta banco
 const db = await initDB();
 
-// rotas
-authRoutes(server, db);
-filmesRoutes(server, db);
-
 // cors
 await server.register(cors, {
   origin: "*",
   methods: ["GET", "POST", "PUT", "DELETE"],
   allowedHeaders: ["Content-Type", "Authorization"],
 });
+
+ImportarCSV(server, db);
+userRota(server, db);
+userLetterboxd(server, db);
+authRoutes(server, db);
+filmesRoutes(server, db);
+
+await server.register(multipart);
 
 // erro global
 server.setErrorHandler((error, request, reply) => {
@@ -38,6 +48,10 @@ server.setErrorHandler((error, request, reply) => {
   });
 });
 
+
+server.get("/ping-letterboxd", async () => {
+  return { ok: true };
+});
 // iniciar servidor
 server.listen({
   port: process.env.PORT || 3000

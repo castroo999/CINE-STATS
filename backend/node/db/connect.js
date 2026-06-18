@@ -5,44 +5,42 @@ import bcrypt from "bcrypt";
 export async function initDB() {
   const db = await connectDB();
 
+  // USERS
   await db.exec(`
-    CREATE TABLE IF NOT EXISTS user (
+    CREATE TABLE IF NOT EXISTS users (
       id TEXT PRIMARY KEY,
-      user TEXT,
+      user TEXT UNIQUE,
       password TEXT,
-      role TEXT
+      role TEXT,
+      letterboxd_user TEXT
     )
   `);
 
+  // FILMES VISTOS
   await db.exec(`
     CREATE TABLE IF NOT EXISTS filmes_vistos (
       id TEXT PRIMARY KEY,
       user_id TEXT NOT NULL,
-      movie_id INTEGER NOT NULL,
-      movie_title TEXT NOT NULL,
-      poster_path TEXT,
+      movie_title TEXT,
+      movie_year TEXT,
       rating REAL,
-      review TEXT,
       watched_at TEXT,
-      created_at TEXT
+      imported_at TEXT
     )
   `);
 
+  // ADMIN PADRÃO
   const adminExiste = await db.get(
-    "SELECT * FROM user WHERE user = ?",
+    "SELECT * FROM users WHERE user = ?",
     ["castro"]
   );
 
   if (!adminExiste) {
     const id = randomUUID();
-
-    const senha = await bcrypt.hash(
-      "Felipinho04",
-      10
-    );
+    const senha = await bcrypt.hash("Felipinho04", 10);
 
     await db.run(
-      "INSERT INTO user (id, user, password, role) VALUES (?, ?, ?, ?)",
+      "INSERT INTO users (id, user, password, role) VALUES (?, ?, ?, ?)",
       [id, "castro", senha, "admin"]
     );
   }

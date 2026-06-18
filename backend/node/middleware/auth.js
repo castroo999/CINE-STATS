@@ -1,3 +1,5 @@
+/* global process */
+
 import jwt from "jsonwebtoken";
 
 export async function verificarToken(request, reply) {
@@ -18,6 +20,7 @@ export async function verificarToken(request, reply) {
     //salva os dados do usuário
     request.user = decoded;
 
+  // eslint-disable-next-line no-unused-vars
   } catch (error) {
     return reply.status(401).send({ error: "Token inválido" });
   }

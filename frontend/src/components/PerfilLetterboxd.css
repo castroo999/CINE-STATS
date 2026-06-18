@@ -1,0 +1,71 @@
+.perfil-container {
+    min-height: 100vh;
+    background: #14181c;
+    color: #fff;
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    
+    font-family: 'Poppins' sans-serif;
+    flex-direction: column;
+}
+
+.busca-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.busca-input {
+    width: 400px;
+    max-width: 100%;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 8px;
+    outline: none;
+    font-size: 1rem;
+}
+
+.btn-buscar {
+    background: #00c030;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.btn-buscar:hover {
+    transform: scale(1.05);
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}
+
+.perfil-card {
+    margin-top: 2rem;
+    background: #1d232a;
+    border-radius: 12px;
+    padding: 1.5rem;
+    max-width: 500px;
+    color: white;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, .25);
+}
+
+.perfil-card h2 {
+    margin-bottom: 1rem;
+}
+
+.perfil-card p {
+    margin: .5rem 0;
+}
+
+.perfil-card button {
+    margin-top: 1rem;
+    width: 100%;
+}

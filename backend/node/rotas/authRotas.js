@@ -1,3 +1,5 @@
+/* global process */
+
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
@@ -25,7 +27,7 @@ export async function authRoutes(server, db) {
       }
 
       const existe = await db.get(
-        "SELECT * FROM user WHERE user = ?",
+        "SELECT * FROM users WHERE user = ?",
         [user]
       );
 
@@ -42,7 +44,7 @@ export async function authRoutes(server, db) {
       const role = "user";
 
       await db.run(
-        "INSERT INTO user (id, user, password, role) VALUES (?, ?, ?, ?)",
+        "INSERT INTO users (id, user, password, role) VALUES (?, ?, ?, ?)",
         [id, user, hash, role]
       );
 
@@ -74,7 +76,7 @@ export async function authRoutes(server, db) {
       }
 
       const usuario = await db.get(
-        "SELECT * FROM user WHERE user = ?",
+        "SELECT * FROM users WHERE user = ?",
         [user]
       );
 
@@ -107,7 +109,15 @@ export async function authRoutes(server, db) {
         }
       );
 
-      return reply.send({ token });
+      return reply.send({
+        token,
+        user: {
+          id: usuario.id,
+          user: usuario.user,
+          role: usuario.role,
+          letterboxd_user: usuario.letterboxd_user
+        }
+      });
 
     } catch (error) {
 
