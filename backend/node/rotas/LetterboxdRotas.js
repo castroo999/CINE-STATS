@@ -31,11 +31,11 @@ export async function userLetterboxd(server, db) {
     }
   );
 
-  
+
   server.get("/letterboxd/profile/:username", async (request) => {
     const { username } = request.params;
 
-    // 1. acha usuário pelo letterboxd username
+    // 1. acha usuário
     const user = await db.get(
       `SELECT * FROM users WHERE letterboxd_user = ?`,
       [username]
@@ -46,11 +46,14 @@ export async function userLetterboxd(server, db) {
         username,
         filmes: 0,
         notaMedia: "0.00",
+        melhorFilme: null,
+        piorFilme: null,
+        ultimoFilme: null,
         ultimos: [],
       };
     }
 
-    // 2. busca filmes pelo ID REAL
+    // 2. busca filmes
     const filmes = await db.all(
       `SELECT * FROM filmes_vistos WHERE user_id = ?`,
       [user.id]
@@ -58,15 +61,41 @@ export async function userLetterboxd(server, db) {
 
     const total = filmes.length;
 
+    // 3. média
     const media =
       filmes.reduce((acc, f) => acc + (f.rating || 0), 0) /
       (total || 1);
+
+    // 4. melhor filme
+    const melhorFilme = filmes.reduce((best, f) =>
+      (f.rating || 0) > (best?.rating || 0) ? f : best,
+      null
+    );
+
+    // 5. pior filme
+    const piorFilme = filmes.reduce((worst, f) =>
+      (f.rating || 0) < (worst?.rating || 10) ? f : worst,
+      null
+    );
+
+    // 6. último assistido (por data)
+    const ultimoFilme = [...filmes].sort((a, b) =>
+      new Date(b.watched_at) - new Date(a.watched_at)
+    )[0];
+
+    // 7. últimos 5
+    const ultimos = filmes
+      .sort((a, b) => new Date(b.watched_at) - new Date(a.watched_at))
+      .slice(0, 5);
 
     return {
       username,
       filmes: total,
       notaMedia: media.toFixed(2),
-      ultimos: filmes.slice(-5),
+      melhorFilme,
+      piorFilme,
+      ultimoFilme,
+      ultimos,
     };
   });
 }

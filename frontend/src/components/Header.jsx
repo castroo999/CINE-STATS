@@ -76,9 +76,7 @@ export default function Header() {
 
           {token && (
             <>
-              <NavLink to="/dashboard">Mapa</NavLink>
-              <NavLink to="/chamados">Seu Perfil</NavLink>
-              <NavLink to="/ver_chamados">Suas Avaliações</NavLink>
+              <NavLink to="/dashboard">Status</NavLink>
             </>
           )}
         </div>

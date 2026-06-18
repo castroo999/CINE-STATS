@@ -14,7 +14,6 @@ export default function PerfilLetterboxd() {
 
       let cleanUsername = username;
 
-      
       if (cleanUsername.includes("letterboxd.com")) {
         cleanUsername = cleanUsername
           .split("letterboxd.com/")[1]
@@ -69,6 +68,13 @@ export default function PerfilLetterboxd() {
           <p>Nota média: {perfil.notaMedia}</p>
 
           <ImportarCSV />
+
+          <p>Filmes: {perfil.filmes}</p>
+          <p>Média: {perfil.notaMedia}</p>
+
+          <p> Melhor filme: {perfil.melhorFilme?.movie_title}</p>
+          <p> Pior filme: {perfil.piorFilme?.movie_title}</p>
+          <p> Último filme visto: {perfil.ultimoFilme?.movie_title}</p>
         </div>
       )}
     </section>
