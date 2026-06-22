@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { toast } from "react-toastify";
 import './ImportCSV.css'
 
 export default function ImportarCSV() {
@@ -23,7 +24,7 @@ export default function ImportarCSV() {
       }
     );
 
-    alert("Importado com sucesso");
+    toast.success("Importado com sucesso");
   }
 
   return (

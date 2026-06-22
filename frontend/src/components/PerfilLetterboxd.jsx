@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 import ImportarCSV from "./ImportCSV";
 import "./PerfilLetterboxd.css";
 
-export default function PerfilLetterboxd() {
+export default function PerfilLetterboxd({onPerfilConectado}) {
   const [username, setUsername] = useState("");
   const [perfil, setPerfil] = useState(null);
 
@@ -12,17 +12,8 @@ export default function PerfilLetterboxd() {
     try {
       const token = localStorage.getItem("token");
 
-      let cleanUsername = username;
-
-      if (cleanUsername.includes("letterboxd.com")) {
-        cleanUsername = cleanUsername
-          .split("letterboxd.com/")[1]
-          .replace("/", "")
-          .trim();
-      }
-
       const response = await axios.get(
-        `http://localhost:3000/letterboxd/profile/${cleanUsername}`,
+        "http://localhost:3000/letterboxd/profile",
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -31,9 +22,13 @@ export default function PerfilLetterboxd() {
       );
 
       setPerfil(response.data);
+      console.log("Perfil carregado");
+      if (onPerfilConectado) {
+        onPerfilConectado(true);
+      }
     } catch (error) {
       console.log(error);
-      toast.error("Erro ao buscar perfil");
+      toast.error("Erro ao buscar perfil faça login ou tente novamente");
     }
   }
   return (

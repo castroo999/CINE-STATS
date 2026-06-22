@@ -31,7 +31,7 @@ export default function Header() {
     setUsuario(null);
     setToken(null);
     window.dispatchEvent(new Event("userChanged"));
-    navigate("/");
+    navigate("/login");
 
     toast.success("Você saiu da sua conta com sucesso!");
   }
@@ -76,7 +76,7 @@ export default function Header() {
 
           {token && (
             <>
-              <NavLink to="/dashboard">Status</NavLink>
+              <NavLink>Status</NavLink>
             </>
           )}
         </div>

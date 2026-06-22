@@ -17,19 +17,40 @@ export async function ImportarCSV(server, db) {
         }
 
         const buffer = await arquivo.toBuffer();
-        const csvText = buffer.toString("utf-8");
+
+        let csvText = buffer.toString("utf-8");
+
+        csvText = csvText.trim();
+
+        console.log(csvText.slice(0, 500));
 
         const records = parse(csvText, {
           columns: true,
           skip_empty_lines: true,
+          bom: true,
+          relax_column_count: true,
         });
 
+        console.log("TOTAL REGISTROS:", records.length);
+
+        if (records.length > 0) {
+          console.log(records[0]);
+        }
+
+        // apaga importação anterior do usuário
+        await db.run(
+          "DELETE FROM filmes_vistos WHERE user_id = ?",
+          [request.user.id]
+        );
+
         const filmes = records.map((f) => ({
-          titulo: f.Name,
-          ano: f.Year,
-          nota: Number(f.Rating) || null,
-          data_assistido: f.Date,
+          titulo: f["Name"],
+          ano: f["Year"],
+          nota: Number(f["Rating"]) || null,
+          data_assistido: f["Watched Date"] || f["Date"] || null,
         }));
+
+        console.log("FILMES PARA IMPORTAR:", filmes.length);
 
         for (const filme of filmes) {
           await db.run(
@@ -57,15 +78,15 @@ export async function ImportarCSV(server, db) {
           );
         }
 
-        return reply.status(200).send({
+        return reply.send({
           message: "Importação concluída com sucesso",
-          total_filmes: filmes.length,
+          total: filmes.length,
         });
-      } catch (error) {
-        console.log("ERRO IMPORT CSV:", error);
+      } catch (err) {
+        console.log("ERRO IMPORT:", err);
 
         return reply.status(500).send({
-          error: "Erro ao processar CSV",
+          error: "Erro no import",
         });
       }
     }
