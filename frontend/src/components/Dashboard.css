@@ -1,86 +1,144 @@
 .comeco {
   text-align: center;
-  padding: 40px 20px;
+  padding: 50px 20px;
+  margin-bottom: 20px;
 }
 
 .adh {
-  display: inline-block;
-  padding: 8px 14px;
+  padding: 8px 16px;
   border-radius: 999px;
-  background: #22c55e20;
+  background: rgba(34, 197, 94, 0.15);
   color: #22c55e;
   font-size: 13px;
   font-weight: 700;
   text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
 .comeco h1 {
-  margin-top: 15px;
+  margin-top: 18px;
   color: #fff;
-  font-size: 2rem;
+  font-size: 2.5rem;
+  font-weight: 800;
 }
 
 .container-info {
   width: 90%;
-  max-width: 1400px;
-  margin: 0 auto 50px;
+  max-width: 1500px;
+  margin: 0 auto 60px;
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 40px;
 }
-
-
 
 .status-cards {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 200px;;
-  gap: 20px;
+  gap: 25px;
+  flex-wrap: wrap;
 }
 
 .card-status {
-  background: #1b1b1b;
-  border: 1px solid #2d2d2d;
-  border-radius: 16px;
-  padding: 24px;
-  transition: 0.3s;
+  background: #18181b;
+  border: 1px solid #27272a;
+  border-radius: 18px;
+  padding: 25px;
+  min-width: 240px;
+  min-height: 130px;
+  transition: all 0.3s ease;
 }
 
 .card-status:hover {
-  transform: scale(1.05);
-  border-color: #2563EB;
+  transform: translateY(-6px);
+  border-color: #2563eb;
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.2);
 }
 
 .card-status span {
   display: block;
-  color: #a3a3a3;
+  color: #a1a1aa;
   font-size: 14px;
   margin-bottom: 12px;
 }
 
 .card-status h2 {
   color: white;
-  font-size: 25px;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.destaques {
+  margin-top: 10px;
+}
+
+.destaques h2 {
+  text-align: center;
+  color: white;
+  margin-bottom: 30px;
+  font-size: 2rem;
+}
+
+.cards-destaques {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.poster-card {
+  width: 260px;
+  background: #18181b;
+  border: 1px solid #27272a;
+  border-radius: 18px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.poster-card:hover {
+  transform: translateY(-8px);
+  border-color: #2563eb;
+  box-shadow: 0 0 25px rgba(37, 99, 235, 0.3);
+}
+
+.poster-card span {
+  display: block;
+  color: #9ca3af;
+  padding: 15px;
+  font-size: 14px;
+}
+
+.poster-card img {
+  width: 100%;
+  height: 390px;
+  object-fit: cover;
+}
+
+.poster-card h3 {
+  color: white;
+  padding: 15px;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.poster-card p {
+  color: #d1d5db;
+  text-align: center;
+  padding-bottom: 15px;
 }
 
 .grafico {
-  background: #1b1b1b;
-  border: 1px solid #2d2d2d;
-  border-radius: 16px;
+  background: #18181b;
+  border: 1px solid #27272a;
+  border-radius: 18px;
   padding: 30px;
 }
 
 .grafico h3 {
   color: white;
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
+  font-size: 1.4rem;
 }
-
-.pizza {
-  margin-bottom: 40px;
-}
-
 
 .tabela {
   width: 100%;
@@ -90,33 +148,33 @@
 .tabela table {
   width: 100%;
   border-collapse: collapse;
-  background: #1b1b1b;
-  border-radius: 16px;
+  background: #18181b;
+  border-radius: 18px;
   overflow: hidden;
 }
 
 .tabela caption {
   color: white;
-  font-size: 1.4rem;
-  font-weight: bold;
-  padding: 20px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  padding: 25px;
   text-align: left;
 }
 
 .tabela thead {
-  background: #2563EB;
+  background: #2563eb;
 }
 
 .tabela th {
   color: white;
-  padding: 16px;
+  padding: 18px;
   text-align: left;
 }
 
 .tabela td {
-  color: #e5e5e5;
-  padding: 16px;
-  border-bottom: 1px solid #2d2d2d;
+  color: #e4e4e7;
+  padding: 18px;
+  border-bottom: 1px solid #27272a;
 }
 
 .tabela tbody tr {
@@ -124,5 +182,64 @@
 }
 
 .tabela tbody tr:hover {
-  background: #262626;
+  background: #27272a;
+}
+
+.ultimos-filmes {
+  margin-top: 40px;
+}
+
+.ultimos-filmes h2 {
+  color: white;
+  text-align: center;
+  margin-bottom: 25px;
+  font-size: 40px;
+}
+
+.filme-card {
+  background: #18181b;
+  border: 1px solid #27272a;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: 0.3s;
+  text-align: center;
+  height: 100%;
+  margin-bottom: 20px;
+}
+
+.filme-card:hover {
+  transform: translateY(-6px);
+  border-color: #2563eb;
+}
+
+.filme-sem-poster {
+  width: 100%;
+  height: 320px;
+  background: #27272a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+}
+
+.filme-card h3 {
+  color: white;
+  padding: 15px 15px 5px;
+  font-size: 1rem;
+}
+
+.filme-card p {
+  color: #9ca3af;
+  margin-bottom: 10px;
+}
+
+.filme-card span {
+  display: block;
+  color: #facc15;
+  font-weight: 700;
+  padding-bottom: 15px;
+}
+
+.swiper {
+  padding-bottom: 20px;
 }

@@ -21,7 +21,10 @@ html {
 body {
   min-width: 320px;
   margin: 0;
-  background: #14181c;
+    background:
+    linear-gradient(180deg,
+      #14181c 0%,
+      #101418 100%);
 }
 
 button,

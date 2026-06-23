@@ -1,4 +1,6 @@
 import "./Dashboard.css";
+import { buscarPoster } from "../services/tmdb";
+import { Star } from "lucide-react";
 import { useEffect, useState } from "react";
 import {
   ResponsiveContainer,
@@ -14,6 +16,11 @@ import {
   CartesianGrid,
 } from "recharts";
 import api from "../services/Api";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 export default function Dashboard() {
   const [stats, setStats] = useState({
@@ -31,8 +38,51 @@ export default function Dashboard() {
       um: 0,
     },
   });
-
+  const [posterMelhor, setPosterMelhor] = useState(null);
+  const [posterPior, setPosterPior] = useState(null);
+  const [posterUltimo, setPosterUltimo] = useState(null);
+  const [postersUltimos, setPostersUltimos] = useState({});
   const COLORS = ["#ef4444", "#f97316", "#facc15", "#84cc16", "#22c55e"];
+
+  useEffect(() => {
+    async function carregarPosters() {
+      try {
+        if (stats.melhorFilme?.movie_title) {
+          const filme = await buscarPoster(stats.melhorFilme.movie_title);
+
+          setPosterMelhor(filme);
+        }
+
+        if (stats.piorFilme?.movie_title) {
+          const filme = await buscarPoster(stats.piorFilme.movie_title);
+
+          setPosterPior(filme);
+        }
+
+        if (stats.ultimoFilme?.movie_title) {
+          const filme = await buscarPoster(stats.ultimoFilme.movie_title);
+
+          setPosterUltimo(filme);
+        }
+
+        if (stats.ultimos?.length) {
+          const posters = {};
+
+          for (const filme of stats.ultimos) {
+            const resultado = await buscarPoster(filme.movie_title);
+
+            posters[filme.id] = resultado;
+          }
+
+          setPostersUltimos(posters);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    carregarPosters();
+  }, [stats]);
 
   useEffect(() => {
     async function carregarDashboard() {
@@ -87,28 +137,46 @@ export default function Dashboard() {
       <div className="container-info">
         <div className="status-cards">
           <div className="card-status">
-            <span> Filmes Assistidos</span>
+            <span>Filmes Assistidos</span>
             <h2>{stats.filmes}</h2>
           </div>
 
           <div className="card-status">
-            <span> Nota Média</span>
+            <span>Nota Média</span>
             <h2>{stats.notaMedia}</h2>
           </div>
+        </div>
 
-          <div className="card-status">
-            <span> Melhor Filme</span>
-            <h2>{stats.melhorFilme?.movie_title || "-"}</h2>
-          </div>
+        <div className="destaques">
+          <h2> Seus Destaques</h2>
 
-          <div className="card-status">
-            <span> Pior Filme</span>
-            <h2>{stats.piorFilme?.movie_title || "-"}</h2>
-          </div>
+          <div className="cards-destaques">
+            <div className="poster-card">
+              <span>Melhor Filme Avaliado</span>
+              <img
+                src={`https://image.tmdb.org/t/p/w500${posterMelhor?.poster_path}`}
+                alt=""
+              />
+              <h3>{stats.melhorFilme?.movie_title}</h3>
+            </div>
 
-          <div className="card-status">
-            <span> Último Filme</span>
-            <h2>{stats.ultimoFilme?.movie_title || "-"}</h2>
+            <div className="poster-card">
+              <span>Pior Filme Avaliado</span>
+              <img
+                src={`https://image.tmdb.org/t/p/w500${posterPior?.poster_path}`}
+                alt=""
+              />
+              <h3>{stats.piorFilme?.movie_title}</h3>
+            </div>
+
+            <div className="poster-card">
+              <span>Último Filme Visto</span>
+              <img
+                src={`https://image.tmdb.org/t/p/w500${posterUltimo?.poster_path}`}
+                alt=""
+              />
+              <h3>{stats.ultimoFilme?.movie_title}</h3>
+            </div>
           </div>
         </div>
 
@@ -154,30 +222,31 @@ export default function Dashboard() {
           </ResponsiveContainer>
         </div>
 
-        <div className="tabela">
-          <table>
-            <caption>Últimos Filmes Assistidos</caption>
+        <div className="ultimos-filmes">
+          <h2>Últimos Filmes Vistos</h2>
 
-            <thead>
-              <tr>
-                <th>Filme</th>
-                <th>Ano</th>
-                <th>Nota</th>
-                <th>Assistido em</th>
-              </tr>
-            </thead>
+          <Swiper slidesPerView={5} spaceBetween={20}>
+            {stats.ultimos?.map((filme) => (
+              <SwiperSlide key={filme.id}>
+                <div className="filme-card">
+                  {postersUltimos[filme.id]?.poster_path ? (
+                    <img
+                      src={`https://image.tmdb.org/t/p/w500${postersUltimos[filme.id].poster_path}`}
+                      alt={filme.movie_title}
+                    />
+                  ) : (
+                    <div className="filme-sem-poster">🎬</div>
+                  )}
 
-            <tbody>
-              {stats.ultimos?.map((filme) => (
-                <tr key={filme.id}>
-                  <td>{filme.movie_title}</td>
-                  <td>{filme.movie_year}</td>
-                  <td>{filme.rating}</td>
-                  <td>{filme.watched_at}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                  <h3>{filme.movie_title}</h3>
+
+                  <p>{filme.movie_year}</p>
+
+                  <span>⭐ {filme.rating}</span>
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </div>
     </>

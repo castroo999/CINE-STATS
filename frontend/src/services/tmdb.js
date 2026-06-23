@@ -29,3 +29,13 @@ export async function filmesEmCartaz() {
 
   return data.results;
 }
+
+export async function buscarPoster(titulo) {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=pt-BR&query=${encodeURIComponent(titulo)}`
+  );
+
+  const data = await response.json();
+
+  return data.results?.[0] || null;
+}
